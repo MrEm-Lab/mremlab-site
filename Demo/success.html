@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<title>Mr.Em Lab – TikTok Login Success</title>
+<body style="font-family:system-ui,Arial;max-width:650px;margin:48px auto;">
+<h1>Authorization Success</h1>
+<p>If you reached this page from TikTok, the URL contains an authorization code:</p>
+<pre id="out" style="background:#f6f6f6;padding:12px;border:1px solid #ddd;border-radius:8px;"></pre>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const code   = params.get('code');
+  const state  = params.get('state');
+  document.getElementById('out').textContent =
+    `code: ${code || '(missing)'}\nstate: ${state || '(missing)'}\n\n` +
+    'On our server (n8n), this code is exchanged for access tokens.';
+</script>
+
+<p><a href="./index.html">Back to demo</a></p>
+</body>
+</html>

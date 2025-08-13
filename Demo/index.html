@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8">
+<title>Mr.Em Lab – TikTok Login Demo</title>
+<style>
+  body { font-family: system-ui, Arial; max-width: 650px; margin: 48px auto; line-height: 1.5; }
+  a.btn { display:inline-block; padding:12px 18px; border:1px solid #222; border-radius:8px; text-decoration:none; }
+</style>
+<body>
+<h1>Mr.Em Lab – TikTok Login Demo</h1>
+<p>This page demonstrates TikTok OAuth for our internal automation. Click the button to sign in with TikTok.</p>
+
+<!-- Replace the values below before committing -->
+<script>
+  // === REQUIRED: fill these ===
+  const CLIENT_KEY   = "YOUR_CLIENT_KEY_HERE"; // from TikTok Developer Console
+  const REDIRECT_URI = encodeURIComponent("https://mrem-lab.github.io/mremlab-site/demo/success.html");
+  const SCOPES       = encodeURIComponent("user.info.basic"); // start with login scope only
+
+  const AUTH_URL = `https://www.tiktok.com/v2/auth/authorize/?client_key=${CLIENT_KEY}&response_type=code&scope=${SCOPES}&redirect_uri=${REDIRECT_URI}&state=mremlab_demo`;
+
+  function go() { window.location.href = AUTH_URL; }
+</script>
+
+<p><a class="btn" href="javascript:go()">Login with TikTok</a></p>
+
+<p><small>
+Notes for reviewer: After authorization, you will be redirected back to our success page with a <code>?code=</code> parameter.  
+Server-side (n8n) exchanges this code for tokens and performs posting/analytics. No personal data is stored.
+</small></p>
+</body>
+</html>
