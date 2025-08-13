@@ -1,9 +1,36 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8">
-<title>Mr.Em Lab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mr.Em Lab – App Overview</title>
+<style>
+  body{font-family:system-ui,Arial,sans-serif;max-width:760px;margin:48px auto;padding:0 16px;line-height:1.6}
+  .grid{display:grid;gap:12px}
+  a.btn{display:inline-block;padding:12px 16px;border:1px solid #222;border-radius:10px;text-decoration:none}
+  code{background:#f6f6f6;padding:2px 6px;border-radius:6px}
+  footer{margin-top:32px;color:#666;font-size:.9rem}
+</style>
 <body>
-  <h1>Mr.Em Lab</h1>
-  <p><a href="./terms.html">Terms of Service</a></p>
-  <p><a href="./privacy.html">Privacy Policy</a></p>
+  <h1>Mr.Em Lab – TikTok Developer App</h1>
+  <p>This site hosts the public pages and demo required for TikTok App Review.</p>
+
+  <div class="grid">
+    <a class="btn" href="./demo/index.html">▶️ Demo: TikTok Login (OAuth)</a>
+    <a class="btn" href="./terms.html">📄 Terms of Service</a>
+    <a class="btn" href="./privacy.html">🔒 Privacy Policy</a>
+  </div>
+
+  <h2>Reviewer Notes</h2>
+  <ul>
+    <li>The demo uses <code>user.info.basic</code> to show OAuth consent and redirect back with an auth <code>code</code>.</li>
+    <li>Server-side (n8n) exchanges the code for tokens for our own channel only.</li>
+    <li>No end users; no personal data stored.</li>
+  </ul>
+
+  <h3>Redirect URI</h3>
+  <p>Configured in TikTok Developer Console as:<br>
+    <code>https://mrem-lab.github.io/mremlab-site/demo/success.html</code>
+  </p>
+
+  <footer>Contact: mr.em.lab.ai@gmail.com</footer>
 </body>
 </html>
