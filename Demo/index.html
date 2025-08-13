@@ -13,7 +13,7 @@
 <script>
   // === REQUIRED: fill these ===
   const CLIENT_KEY   = "awt5ug8g8vte0cbr"; // from TikTok Developer Console
-  const REDIRECT_URI = encodeURIComponent("https://mrem-lab.github.io/mremlab-site/Demo/success.html");
+  const REDIRECT_URI = encodeURIComponent("https://mrem-lab.github.io/mremlab-site/demo/success.html");
   const SCOPES       = encodeURIComponent("user.info.basic"); // start with login scope only
 
   const AUTH_URL = `https://www.tiktok.com/v2/auth/authorize/?client_key=${CLIENT_KEY}&response_type=code&scope=${SCOPES}&redirect_uri=${REDIRECT_URI}&state=mremlab_demo`;
@@ -29,6 +29,7 @@ Server-side (n8n) exchanges this code for tokens and performs posting/analytics.
 </small></p>
 </body>
 </html>
+
 
 
 
