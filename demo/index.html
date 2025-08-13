@@ -1,60 +1,31 @@
 <!doctype html>
 <html lang="en"><meta charset="utf-8">
 <title>Mr.Em Lab – TikTok Login Demo</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  body{font-family:system-ui,Arial;max-width:720px;margin:48px auto;padding:0 16px;line-height:1.6}
-  .btn{display:inline-block;padding:12px 16px;border:1px solid #222;border-radius:10px;text-decoration:none}
-  pre{background:#f6f6f6;padding:12px;border-radius:8px;overflow:auto}
-  .err{color:#b00020}
+  body { font-family: system-ui, Arial; max-width: 650px; margin: 48px auto; line-height: 1.5; }
+  a.btn { display:inline-block; padding:12px 18px; border:1px solid #222; border-radius:8px; text-decoration:none; }
 </style>
 <body>
-<h1>Mr.Em Lab – TikTok OAuth Demo</h1>
-<p>This demo triggers TikTok Login (Login Kit) and returns to our redirect page with an auth <code>code</code>.</p>
+<h1>Mr.Em Lab – TikTok Login Demo</h1>
+<p>This page demonstrates TikTok OAuth for our internal automation. Click the button to sign in with TikTok.</p>
 
+<!-- Replace the values below before committing -->
 <script>
-  // >>>>>> PUT YOUR REAL CLIENT KEY HERE <<<<<<
-  const CLIENT_KEY = "awt5ug8g8vte0cbr"; // e.g., awd123abcXYZ
-  const REDIRECT   = "https://mrem-lab.github.io/mremlab-site/demo/success.html";
-  const SCOPE      = "user.info.basic"; // minimal scope for demo
-  const STATE      = "mremlab_demo";
+  // === REQUIRED: fill these ===
+  const CLIENT_KEY   = "awt5ug8g8vte0cbr"; // from TikTok Developer Console
+  const REDIRECT_URI = encodeURIComponent("https://mrem-lab.github.io/mremlab-site/demo/success.html");
+  const SCOPES       = encodeURIComponent("user.info.basic"); // start with login scope only
 
-  function authUrl(){
-    const p = new URLSearchParams();
-    p.set("client_key", CLIENT_KEY);
-    p.set("response_type", "code");
-    p.set("scope", SCOPE);
-    p.set("redirect_uri", REDIRECT);
-    p.set("state", STATE);
-    return "https://www.tiktok.com/v2/auth/authorize/?" + p.toString();
-  }
+  const AUTH_URL = `https://www.tiktok.com/v2/auth/authorize/?client_key=${CLIENT_KEY}&response_type=code&scope=${SCOPES}&redirect_uri=${REDIRECT_URI}&state=mremlab_demo`;
 
-  function go(){
-    if(!CLIENT_KEY || CLIENT_KEY.includes("YOUR_CLIENT_KEY_HERE")){
-      document.getElementById("err").textContent =
-        "Set your actual TikTok Client Key in demo/index.html (CLIENT_KEY).";
-      return;
-    }
-    window.location.href = authUrl();
-  }
-
-  // Render the URL so you can click it directly if needed
-  window.addEventListener("DOMContentLoaded", ()=>{
-    const url = authUrl();
-    document.getElementById("url").textContent = url;
-    const anchor = document.getElementById("direct");
-    anchor.href = url;
-  });
+  function go() { window.location.href = AUTH_URL; }
 </script>
 
-<p><a class="btn" href="javascript:void 0" onclick="go()">Login with TikTok</a></p>
-<p>Or try the direct link (bypasses JS): <a id="direct" class="btn" href="#" rel="nofollow">Open TikTok Consent</a></p>
+<p><a class="btn" href="javascript:go()">Login with TikTok</a></p>
 
-<p id="err" class="err"></p>
-
-<h3>Debug</h3>
-<pre id="url"></pre>
-
-<p><small>Reviewer note: After authorization, TikTok redirects to our verified URL with <code>?code=</code>. Server (n8n) exchanges the code for tokens. No personal data is stored.</small></p>
+<p><small>
+Notes for reviewer: After authorization, you will be redirected back to our success page with a <code>?code=</code> parameter.  
+Server-side (n8n) exchanges this code for tokens and performs posting/analytics. No personal data is stored.
+</small></p>
 </body>
 </html>
